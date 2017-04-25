@@ -1,0 +1,13 @@
+{
+  "name": "@kazk/codewars-runner",
+  "description": "",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "mkdirp": "^0.5.1",
+    "request": "^2.81.0",
+    "temp": "^0.8.3"
+  }
+}
