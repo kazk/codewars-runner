@@ -1,10 +1,11 @@
 {
   "name": "@kazk/codewars-runner",
-  "description": "",
-  "version": "0.1.0",
+  "description": "Temporary pacakge to try multi-package approach",
+  "version": "0.1.2",
   "main": "lib/index.js",
   "license": "AGPL-3.0",
   "dependencies": {
+    "ably": "^1.0.4",
     "bluebird": "^3.5.0",
     "mkdirp": "^0.5.1",
     "request": "^2.81.0",
