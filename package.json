@@ -1,7 +1,7 @@
 {
   "name": "@kazk/codewars-runner",
   "description": "Temporary pacakge to try multi-package approach",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "lib/index.js",
   "license": "AGPL-3.0",
   "dependencies": {
