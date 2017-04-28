@@ -13,7 +13,7 @@ buffer.shell       = ''
 buffer.exitCode    = 0
 buffer.exitSignal  = ''
 buffer.wallTime    = 0
-buffer.outputType  = ''
+buffer.outputType  = 'pre'
 ```
 
 ---

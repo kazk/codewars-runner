@@ -4,9 +4,7 @@ RUN apk --no-cache add \
     bash \
     coreutils \
     findutils \
-    git \
-    wget \
-    tar
+    git
 
 RUN adduser -D codewarrior
 
