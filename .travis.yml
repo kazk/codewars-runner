@@ -1,0 +1,19 @@
+sudo: required
+
+language: node_js
+node_js:
+  - "7.7.x"
+
+install:
+  - npm install -g eslint
+
+services:
+  - docker
+
+after_success:
+  - docker ps -a
+  - docker images -a
+
+script:
+  - eslint '**/*.js'
+  - docker build -t cw/runner:test .
