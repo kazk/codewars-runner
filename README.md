@@ -37,6 +37,10 @@ buffer.outputType  = 'pre'
 
 ## CHANGELOG
 
+### 0.5.0
+
+- Refactored `lib/shovel.js` to use `async`/`await`
+
 ### 0.4.0
 
 - Added tests
