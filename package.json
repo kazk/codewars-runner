@@ -1,12 +1,12 @@
 {
   "name": "@kazk/codewars-runner",
   "description": "Temporary pacakge to try multi-package approach",
-  "version": "0.5.0",
+  "version": "0.6.0-rc1",
   "repository": "kazk/codewars-runner",
   "main": "lib/index.js",
   "license": "AGPL-3.0",
   "scripts": {
-    "make": "docker build -t cw/runner:test ."
+    "make": "docker build -t kazk/codewars-runner:test ."
   },
   "dependencies": {
     "ably": "^1.0.4",

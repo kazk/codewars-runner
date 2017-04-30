@@ -23,7 +23,6 @@ buffer.outputType  = 'pre'
 - Develop with Node 7.6+ to make use of `async`/`await`.
   - Use Node 8 when released (`2017-05-30`) which will become LTS.
 - Handle Errors
-- Separate `lib/services.js`
 - Cleanup `lib/util.js`
   - Replace with packages from npm
   - Remove `util.codeWriteSync`
@@ -36,6 +35,12 @@ buffer.outputType  = 'pre'
 
 
 ## CHANGELOG
+
+### 0.6.0-rc1
+
+- Removed `lib/services.js`.
+  - `opts.services` is now an array of functions returning promises.
+    Either specify them directly, or use `strategies.modifyOpts` to map service name to a function.
 
 ### 0.5.0
 
