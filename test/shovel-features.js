@@ -118,4 +118,44 @@ describe('shovel', function() {
       ''
     ].join('\n'));
   });
+
+
+  it('should support services', async function() {
+    const cp = require('child_process');
+    const startService = {
+      redis(opts) {
+        return new Promise((resolve, reject) => {
+          opts.publish('status', 'Starting redis-server');
+          const rs = cp.spawn('redis-server', ['--dir', opts.dir]);
+          rs.stdout.on('data', (data) => {
+            if (data && data.includes('Running')) resolve();
+          });
+          rs.on('error', reject);
+          setTimeout(() => reject('timeout'), 2000);
+        }).catch(err => {
+          console.log(err);
+        });
+      }
+    };
+
+    const buffer = await shovel.start({
+      code: '#',
+      services: ['redis']
+    }, {
+      modifyOpts(opts) {
+        // map service name to function returning promise
+        opts.services = opts.services.map(s => startService[s]);
+      },
+      solutionOnly(runCode) {
+        runCode({
+          name: 'redis-cli',
+          args: ['set', 'foo', '100'],
+          options: {
+            cwd: '/home/codewarrior'
+          }
+        });
+      }
+    });
+    expect(buffer.stdout).to.equal('OK\n');
+  });
 });

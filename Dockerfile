@@ -4,7 +4,8 @@ RUN apk --no-cache add \
     bash \
     coreutils \
     findutils \
-    git
+    git \
+    redis
 
 RUN adduser -D codewarrior
 
@@ -14,14 +15,11 @@ RUN cd /tmp/runner && yarn install
 
 COPY lib /tmp/runner/lib
 COPY test /tmp/runner/test
-# COPY creates with UID=0,GID=0 regardless of USER
-# USER root
-# RUN chown -R codewarrior:codewarrior /home/codewarrior/runner
 
 USER codewarrior
 ENV USER=codewarrior HOME=/home/codewarrior
 WORKDIR /tmp/runner
 
-RUN NODE_ENV=test node_modules/.bin/mocha -t 5s
+RUN NODE_ENV=test node_modules/.bin/mocha -t 8s
 
 CMD ["node"]
