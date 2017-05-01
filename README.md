@@ -35,9 +35,14 @@ buffer.outputType  = 'pre'
     - `lib/runners/kotlin.js`
     - `lib/runners/csharp.js`
 - Cleanup `exec` in `lib/shovel.js`
+  - Make `fail` more clear
 
 
 ## CHANGELOG
+
+### 0.6.0-rc2
+  - Changes to `opts.services` is reverted
+  - Services are started by `strategies.startService(service, opts)` which returns a Promise.
 
 ### 0.6.0-rc1
 
@@ -45,7 +50,7 @@ buffer.outputType  = 'pre'
   - `opts.services` is now an array of functions returning promises.
     Either specify them directly, or use `strategies.modifyOpts` to map service name to a function.
   - `C#` uses `opts.services` to add DLLs.
-    It should be still possible to suppor this.
+    It should be still possible to support this.
 
 ### 0.5.0
 
