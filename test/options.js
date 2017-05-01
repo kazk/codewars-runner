@@ -194,6 +194,8 @@ describe('processOptions(opts)', function() {
     });
 
     // not documented
+    // mentioned in csharp.js
+    // https://github.com/Codewars/codewars-runner-cli/blob/815480438a336443327e850a2c9e51eaae8e4989/lib/runners/csharp.js#L66
     it.skip('@config: reference {ref}', function() {
     });
     it.skip('@reference {ref}', function() {
