@@ -12,8 +12,7 @@
     "ably": "^1.0.4",
     "got": "^6.3.0",
     "download": "^6.0.0",
-    "fs-extra": "^3.0.0",
-    "temp": "^0.8.3"
+    "fs-extra": "^3.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
