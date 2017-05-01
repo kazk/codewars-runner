@@ -3,7 +3,9 @@ Temporary package to try multi-package approach.
 
 ---
 
-## ResultBuffer
+## Notes
+
+### ResultBuffer
 
 ```
 buffer.stdout      = ''
@@ -32,6 +34,7 @@ buffer.outputType  = 'pre'
     - `lib/runners/nasm.js`
     - `lib/runners/kotlin.js`
     - `lib/runners/csharp.js`
+- Cleanup `exec` in `lib/shovel.js`
 
 
 ## CHANGELOG
