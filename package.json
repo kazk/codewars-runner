@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "license": "AGPL-3.0",
   "scripts": {
-    "make": "docker build -t kazk/codewars-runner:test ."
+    "make": "docker build ."
   },
   "dependencies": {
     "ably": "^1.0.4",
