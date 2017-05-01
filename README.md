@@ -44,6 +44,8 @@ buffer.outputType  = 'pre'
 - Removed `lib/services.js`.
   - `opts.services` is now an array of functions returning promises.
     Either specify them directly, or use `strategies.modifyOpts` to map service name to a function.
+  - `C#` uses `opts.services` to add DLLs.
+    It should be still possible to suppor this.
 
 ### 0.5.0
 
