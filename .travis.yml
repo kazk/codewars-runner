@@ -16,4 +16,4 @@ after_success:
 
 script:
   - eslint '**/*.js'
-  - docker build -t cw/runner:test .
+  - docker build .
