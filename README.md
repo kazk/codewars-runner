@@ -1,25 +1,6 @@
 Temporary package to try multi-package approach.
 
 
----
-
-## Notes
-
-### ResultBuffer
-
-```
-buffer.stdout      = ''
-buffer.stderr      = ''
-buffer.status      = ''
-buffer.shell       = ''
-buffer.exitCode    = 0
-buffer.exitSignal  = ''
-buffer.wallTime    = 0
-buffer.outputType  = 'pre'
-```
-
----
-
 ## TODO
 
 - Develop with Node 7.6+ to make use of `async`/`await`.
@@ -36,6 +17,8 @@ buffer.outputType  = 'pre'
     - `lib/runners/csharp.js`
 - Cleanup `exec` in `lib/shovel.js`
   - Make `fail` more clear
+    - Should be handled by `shovel.js` to keep errors uniform
+      - `rust.js` calls `fail({stdout, stderr})` and all the info is lost.
 
 
 ## CHANGELOG
