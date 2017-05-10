@@ -144,6 +144,27 @@ describe('createRunner', function() {
     expect(buffer.stdout).to.equal('foobar\n');
   });
 
+  it('should handle timeout', async function() {
+    const run = runner.createRunner({
+      async solutionOnly(opts) {
+        return {
+          name: 'sleep',
+          args: ['2'],
+          options: {
+            cwd: '/home/codewarrior'
+          }
+        };
+      }
+    });
+    const buffer = await run({
+      timeout: 1000,
+      solution: '#',
+    });
+    expect(buffer.stdout).to.equal('');
+    expect(buffer.stderr).to.equal('Process was terminated. It took longer than 1000ms to complete\n');
+    expect(buffer.status).to.equal('max_time_reached');
+  });
+
   it('should support services', async function() {
     const cp = require('child_process');
     function startRedis(opts) {
@@ -223,6 +244,4 @@ describe('createRunner', function() {
     expect(buffer.stderr).to.equal('');
     expect(buffer.stdout).to.equal(Array.from({length: 9999}, (_, i) => i*10).join('\n') + '\n');
   });
-
-
 });
