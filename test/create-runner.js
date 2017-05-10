@@ -161,7 +161,7 @@ describe('createRunner', function() {
       solution: '#',
     });
     expect(buffer.stdout).to.equal('');
-    expect(buffer.stderr).to.equal('Process was terminated. It took longer than 1000ms to complete\n');
+    expect(buffer.stderr).to.equal('Process was terminated. It took longer than 1000ms to complete.\n');
     expect(buffer.status).to.equal('max_time_reached');
   });
 
@@ -228,20 +228,5 @@ describe('createRunner', function() {
     expect(buffer.compilationFailure).to.be.true;
   });
 
-  // TODO Test for single stdout write containing large output (> 65536 bytes) with multibyte characters
-  it.skip('should be able to handle large output data', async function() {
-    const run = runner.createRunner({
-      async solutionOnly(opts) {
-        return {
-          name: 'node',
-          args: ['/workspace/solution.txt']
-        };
-      }
-    });
-    const buffer = await run({
-      code: `for (let i = 0; i < 9999; ++i) console.log(i * 10);`
-    });
-    expect(buffer.stderr).to.equal('');
-    expect(buffer.stdout).to.equal(Array.from({length: 9999}, (_, i) => i*10).join('\n') + '\n');
-  });
+  // TODO Test for multibyte characters
 });

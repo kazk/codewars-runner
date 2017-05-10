@@ -15,11 +15,6 @@ Temporary package to try multi-package approach.
     - `lib/runners/nasm.js`
     - `lib/runners/kotlin.js`
     - `lib/runners/csharp.js`
-- Cleanup `exec` in `lib/shovel.js`
-  - Make `fail` more clear
-    - Should be handled by `shovel.js` to keep errors uniform
-      - `rust.js` calls `fail({stdout, stderr})` and all the info is lost.
-
 
 ## CHANGELOG
 
