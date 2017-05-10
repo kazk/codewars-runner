@@ -89,8 +89,8 @@ describe('createRunner', function() {
       'sample.js',
       'sample.rb',
       'solution.txt',
-      'start.sh',
-      'test.txt',
+      'start.sh', // echo "test" => "test.txt"
+      'test.txt', // test =
       ''
     ].join('\n'));
   });
@@ -117,6 +117,31 @@ describe('createRunner', function() {
       'solution.txt',
       ''
     ].join('\n'));
+  });
+
+  it('should support strategies.files(opts)', async function() {
+    const run = runner.createRunner({
+      async files(opts) {
+        const fs = require('fs-extra');
+        return Promise.all(Object.keys(opts.files).map(p => fs.outputFile(`${opts.dir}/${p}`, opts.files[p] + 'bar\n')));
+      },
+      async solutionOnly(opts) {
+        return {
+          name: 'cat',
+          args: ['./file.txt'],
+          options: {
+            cwd: '/home/codewarrior'
+          }
+        };
+      }
+    });
+    const buffer = await run({
+      solution: '#',
+      files: {
+        'file.txt': 'foo',
+      }
+    });
+    expect(buffer.stdout).to.equal('foobar\n');
   });
 
   it('should support services', async function() {
@@ -167,7 +192,7 @@ describe('createRunner', function() {
     });
     const buffer = await run({code: '#'});
     expect(buffer.stdout).to.equal('');
-    expect(buffer.stderr).to.equal('message in stderr\n');
+    expect(buffer.stderr).to.equal('message in stderr');
     expect(buffer.compilationFailure).to.be.true;
   });
   it('should handle .compilationFailure for testIntegration', async function() {
@@ -178,10 +203,11 @@ describe('createRunner', function() {
     });
     const buffer = await run({solution: '#', fixture: '#'});
     expect(buffer.stdout).to.equal('');
-    expect(buffer.stderr).to.equal('message in stderr\n');
+    expect(buffer.stderr).to.equal('message in stderr');
     expect(buffer.compilationFailure).to.be.true;
   });
 
+  // TODO Test for single stdout write containing large output (> 65536 bytes) with multibyte characters
   it.skip('should be able to handle large output data', async function() {
     const run = runner.createRunner({
       async solutionOnly(opts) {
@@ -198,5 +224,5 @@ describe('createRunner', function() {
     expect(buffer.stdout).to.equal(Array.from({length: 9999}, (_, i) => i*10).join('\n') + '\n');
   });
 
-  // TODO Test for single stdout write containing large output (> 65536 bytes) with multibyte characters
+
 });
