@@ -6,9 +6,6 @@ Temporary package to try multi-package approach.
 - Develop with Node 7.6+ to make use of `async`/`await`.
   - Use Node 8 when released (`2017-05-30`) which will become LTS.
 - Handle Errors
-- Cleanup `lib/util.js`
-  - Replace with packages from npm
-  - Remove `util.codeWriteSync`
   
 ## CHANGELOG
 
