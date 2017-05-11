@@ -9,7 +9,7 @@ const KOTLIN = KOTLIN_BASE + 'kotlin';
 const KOTLINC = KOTLIN_BASE + 'kotlinc';
 
 function solutionOnly(opts) {
-  return new Promie((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const classDirectory = path.join(opts.dir, 'classes');
     const solutionFile = path.join(opts.dir, getFileName(opts.solution, 'Solution.kt'));
     const solutionClassName = path.basename(solutionFile, '.kt');

@@ -35,7 +35,7 @@ async function testIntegration(opts) {
 }
 
 function getFileName(code, fallback) {
-  const m = /module\s+([a-z|A-Z][a-z|A-Z|0-9]*)\W/.exec(code);
-  if (m !== null) return m[1].replace(/\./g, '/').replace(/-/g, '_') + '.jl';
+  const m = /module\s+([a-zA-Z][a-zA-Z\d]*)\W/.exec(code);
+  if (m !== null) return m[1] + '.jl';
   return fallback;
 }
