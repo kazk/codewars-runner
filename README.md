@@ -9,13 +9,7 @@ Temporary package to try multi-package approach.
 - Cleanup `lib/util.js`
   - Replace with packages from npm
   - Remove `util.codeWriteSync`
-  - Remove `util.exec`, update the following:
-    - `lib/runners/arm.js`
-    - `lib/runners/gas.js`
-    - `lib/runners/nasm.js`
-    - `lib/runners/kotlin.js`
-    - `lib/runners/csharp.js`
-
+  
 ## CHANGELOG
 
 ### 0.6.0-rc2
