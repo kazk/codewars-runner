@@ -5,7 +5,7 @@ const runner = require('../');
 
 describe('createRunner', function() {
   it('echo', async function() {
-    const run = runner.createRunner({
+    const run = runner({
       async solutionOnly(opts) {
         return {
           name: 'echo',
@@ -18,7 +18,7 @@ describe('createRunner', function() {
   });
 
   it('should support githubRepo downloading', async function() {
-    const run = runner.createRunner({
+    const run = runner({
       async solutionOnly(opts) {
         return {
           name: 'ls',
@@ -44,7 +44,7 @@ describe('createRunner', function() {
   });
 
   it('should support gist downloading', async function() {
-    const run = runner.createRunner({
+    const run = runner({
       async solutionOnly(opts) {
         return {
           name: 'ls',
@@ -67,7 +67,7 @@ describe('createRunner', function() {
   });
 
   it('should support config bash-file', async function() {
-    const run = runner.createRunner({
+    const run = runner({
       async solutionOnly(opts) {
         return {
           name: 'ls',
@@ -96,7 +96,7 @@ describe('createRunner', function() {
   });
 
   it('should support additional files', async function() {
-    const run = runner.createRunner({
+    const run = runner({
       async solutionOnly(opts) {
         return {
           name: 'ls',
@@ -120,7 +120,7 @@ describe('createRunner', function() {
   });
 
   it('should support strategies.files(opts)', async function() {
-    const run = runner.createRunner({
+    const run = runner({
       async files(opts) {
         const fs = require('fs-extra');
         return Promise.all(Object.keys(opts.files).map(p => fs.outputFile(`${opts.dir}/${p}`, opts.files[p] + 'bar\n')));
@@ -145,7 +145,7 @@ describe('createRunner', function() {
   });
 
   it('should handle timeout', async function() {
-    const run = runner.createRunner({
+    const run = runner({
       async solutionOnly(opts) {
         return {
           name: 'sleep',
@@ -182,7 +182,7 @@ describe('createRunner', function() {
       });
     }
 
-    const run = runner.createRunner({
+    const run = runner({
       startService(service, opts) {
         if (service == 'redis') return startRedis(opts);
         return Promise.resolve();
@@ -206,7 +206,7 @@ describe('createRunner', function() {
   });
 
   it('should handle .compilationFailure for solutionOnly', async function() {
-    const run = runner.createRunner({
+    const run = runner({
       async solutionOnly(opts) {
         throw new Error('message in stderr');
       }
@@ -217,7 +217,7 @@ describe('createRunner', function() {
     expect(buffer.compilationFailure).to.be.true;
   });
   it('should handle .compilationFailure for testIntegration', async function() {
-    const run = runner.createRunner({
+    const run = runner({
       async testIntegration(opts) {
         throw new Error('message in stderr');
       }
