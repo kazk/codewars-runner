@@ -1,43 +1,12 @@
 Temporary package to try multi-package approach.
 
 
----
-
-## Notes
-
-### ResultBuffer
-
-```
-buffer.stdout      = ''
-buffer.stderr      = ''
-buffer.status      = ''
-buffer.shell       = ''
-buffer.exitCode    = 0
-buffer.exitSignal  = ''
-buffer.wallTime    = 0
-buffer.outputType  = 'pre'
-```
-
----
-
 ## TODO
 
 - Develop with Node 7.6+ to make use of `async`/`await`.
   - Use Node 8 when released (`2017-05-30`) which will become LTS.
 - Handle Errors
-- Cleanup `lib/util.js`
-  - Replace with packages from npm
-  - Remove `util.codeWriteSync`
-  - Remove `util.exec`, update the following:
-    - `lib/runners/arm.js`
-    - `lib/runners/gas.js`
-    - `lib/runners/nasm.js`
-    - `lib/runners/kotlin.js`
-    - `lib/runners/csharp.js`
-- Cleanup `exec` in `lib/shovel.js`
-  - Make `fail` more clear
-
-
+  
 ## CHANGELOG
 
 ### 0.6.0-rc2

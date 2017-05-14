@@ -12,6 +12,7 @@ RUN adduser -D codewarrior
 COPY package.json /tmp/runner/package.json
 ENV NPM_CONFIG_LOGLEVEL=warn
 RUN cd /tmp/runner && yarn install
+RUN ln -s /home/codewarrior /workspace
 
 COPY lib /tmp/runner/lib
 COPY test /tmp/runner/test
