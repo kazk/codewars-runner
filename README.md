@@ -9,6 +9,9 @@ Temporary package to try multi-package approach.
   
 ## CHANGELOG
 
+### 0.7.0
+  - Simplified how runners are defined. See [examples](examples/)
+
 ### 0.6.0-rc2
   - Changes to `opts.services` is reverted
   - Services are started by `strategies.startService(service, opts)` which returns a Promise.
