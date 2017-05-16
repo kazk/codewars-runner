@@ -229,4 +229,66 @@ describe('createRunner', function() {
   });
 
   // TODO Test for multibyte characters
+
+
+  it('should handle transformBuffer', async function() {
+    const run = runner({
+      async solutionOnly(opts) {
+        return {
+          name: 'node',
+          args: ['-e', opts.solution]
+        };
+      },
+      transformBuffer(buffer, opts) {
+        const out = buffer.stdout;
+        buffer.stdout = buffer.stderr;
+        buffer.stderr = out;
+        return buffer;
+      }
+    });
+    const buffer = await run({
+      solution: [
+        `process.stdout.write('stdout\\n');`,
+        `process.stderr.write('stderr\\n');`,
+      ].join('\n'),
+    });
+    expect(buffer.stdout).to.equal('stderr\n');
+    expect(buffer.stderr).to.equal('stdout\n');
+  });
+
+  it('should handle sanitizeStdOut', async function() {
+    const run = runner({
+      async solutionOnly(opts) {
+        return {
+          name: 'node',
+          args: ['-e', opts.solution]
+        };
+      },
+      sanitizeStdOut(stdout, opts) {
+        return stdout + 'bar\n';
+      }
+    });
+    const buffer = await run({
+      solution: `process.stdout.write('foo');`,
+    });
+    expect(buffer.stdout).to.equal('foobar\n');
+  });
+
+  it('should handle sanitizeStdErr', async function() {
+    const run = runner({
+      async solutionOnly(opts) {
+        return {
+          name: 'node',
+          args: ['-e', opts.solution]
+        };
+      },
+      sanitizeStdErr(stderr, opts) {
+        return stderr + 'bar\n';
+      }
+    });
+    const buffer = await run({
+      solution: `process.stderr.write('foo');`,
+    });
+    expect(buffer.stderr).to.equal('foobar\n');
+  });
 });
