@@ -37,16 +37,17 @@ function modifyOpts(opts) {
   }
 }
 
-function sanitizeStdErr(error, opts) {
+function transformBuffer(buffer, opts) {
+  if (buffer.stderr) buffer.stderr = sanitize(buffer.stderr, opts);
+  if (buffer.stdout) buffer.stdout = sanitize(buffer.stdout, opts);
+}
+
+function sanitize(error, opts) {
   return error.replace(/[\w/-]*(cw-2.rb):[\d]*:in( `(measure|wrap_error|it|describe)'<:LF:>)?/g, '')
               .replace(/-e:[\d]*:in/g, '')
               .replace('  ', ' ')
               .replace(/<:LF:> `(block in )?(<main>|describe|it)'/g, '')
               .replace('  ', ' ');
-}
-
-function sanitizeStdOut(stdout, opts) {
-  return sanitizeStdErr(stdout, opts);
 }
 
 async function useCw2(opts) {

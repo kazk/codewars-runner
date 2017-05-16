@@ -231,7 +231,7 @@ describe('createRunner', function() {
   // TODO Test for multibyte characters
 
 
-  it('should handle transformBuffer', async function() {
+  it('should allow transforming buffer', async function() {
     const run = runner({
       async solutionOnly(opts) {
         return {
@@ -256,7 +256,7 @@ describe('createRunner', function() {
     expect(buffer.stderr).to.equal('stdout\n');
   });
 
-  it('should handle sanitizeStdOut', async function() {
+  it('should allow modifying stdout', async function() {
     const run = runner({
       async solutionOnly(opts) {
         return {
@@ -264,8 +264,8 @@ describe('createRunner', function() {
           args: ['-e', opts.solution]
         };
       },
-      sanitizeStdOut(stdout, opts) {
-        return stdout + 'bar\n';
+      transformBuffer(buffer, opts) {
+        buffer.stdout += 'bar\n';
       }
     });
     const buffer = await run({
@@ -274,7 +274,7 @@ describe('createRunner', function() {
     expect(buffer.stdout).to.equal('foobar\n');
   });
 
-  it('should handle sanitizeStdErr', async function() {
+  it('should allow modifying stderr', async function() {
     const run = runner({
       async solutionOnly(opts) {
         return {
@@ -282,8 +282,8 @@ describe('createRunner', function() {
           args: ['-e', opts.solution]
         };
       },
-      sanitizeStdErr(stderr, opts) {
-        return stderr + 'bar\n';
+      transformBuffer(buffer, opts) {
+        buffer.stderr += 'bar\n';
       }
     });
     const buffer = await run({

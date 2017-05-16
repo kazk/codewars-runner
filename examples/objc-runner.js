@@ -57,6 +57,7 @@ function transformBuffer(buffer, opts) {
   if (buffer.stderr.replace(/[ \n]/g, '') == '') {
     buffer.stderr = '';
   }
+  if (buffer.stderr) buffer.stderr = sanitizeStdErr(buffer.stderr, opts);
 }
 
 function sanitizeStdErr(error, opts) {

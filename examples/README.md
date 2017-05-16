@@ -64,10 +64,6 @@ Write `opts.files`. Default behavior is to write all files in `opts.files` under
 Transforms the buffer before any additional stdout/err specific processing is made.
 Useful for things like when you may want to split stdout into both stdout and stderr.
 
-### sanitizeStdOut(stderr, opts)
-
-### sanitizeStdErr(stderr, opts)
-
 ## Auxiliary Properties
 
 ### defaultOptions

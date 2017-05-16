@@ -51,7 +51,13 @@ async function testIntegration(opts) {
   }
 }
 
-function sanitizeStdErr(error, opts) {
+
+function transformBuffer(buffer, opts) {
+  if (buffer.stdout) buffer.stdout = sanitize(buffer.stdout, opts);
+  if (buffer.stderr) buffer.stderr = sanitize(buffer.stderr, opts);
+}
+
+function sanitize(error, opts) {
   return error.replace(/(\()?\/codewars\/[(\w\/-\d.js:) ;]*/g, '')
               .replace(/( Object. )?[\(]?\[eval\][-:\w\d\)]* at/g, '')
               .replace(/Module._compile.*/g, '')
@@ -59,10 +65,6 @@ function sanitizeStdErr(error, opts) {
               .replace('  ', ' ')
               .replace(opts.setup || '', '')
               .replace(opts.fixture || '', '');
-}
-
-function sanitizeStdOut(stdout, opts) {
-  return sanitizeStdErr(stdout, opts);
 }
 
 // a files object/hash can be passed in as options, which will be transformed (if applicable) and then stored

@@ -23,6 +23,11 @@ async function testIntegration(opts) {
   }
 }
 
+function transformBuffer(buffer, opts) {
+  if (buffer.stdout) buffer.stdout = sanitizeStdOut(buffer.stdout, opts);
+  if (buffer.stderr) buffer.stderr = sanitizeStdErr(buffer.stderr, opts);
+}
+
 function sanitizeStdOut(output, opts) {
   return output.split('\n')
                .filter(s => blacklist.every(re => !re.test(s)))
