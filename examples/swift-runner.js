@@ -36,6 +36,10 @@ function testIntegration(opts) {
   });
 }
 
+function transformBuffer(buffer, opts) {
+  if (buffer.stderr) buffer.stderr = sanitizeStdErr(buffer.stderr, opts);
+}
+
 function sanitizeStdErr(err, opts) {
   const setup = opts.setup ? opts.setup.split('\n').length : 0;
   const code = opts.solution.split('\n').length;

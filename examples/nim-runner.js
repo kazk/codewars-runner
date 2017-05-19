@@ -28,6 +28,10 @@ async function testIntegration(opts) {
   };
 }
 
+function transformBuffer(buffer, opts) {
+  if (buffer.stderr) buffer.stderr = sanitizeStdErr(buffer.stderr, opts);
+}
+
 // Remove output from Nim
 // Error: execution of an external program failed: '/home/codewarrior/fixture '
 function sanitizeStdErr(stderr, opts) {

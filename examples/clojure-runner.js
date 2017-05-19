@@ -18,6 +18,9 @@ async function testIntegration(opts) {
   };
 }
 
+function transformBuffer(buffer, opts) {
+  if (buffer.stdout) buffer.stdout = sanitizeStdOut(buffer.stdout, opts);
+}
 // HACK: don't know clojure well enough to fix issue within actual runner, but it is escaping line breaks when it shouldn't
 function sanitizeStdOut(stdout, opts) {
   return stdout.replace(/\<:LF:\>\<PASSED::\>/g, '\n<PASSED::>')

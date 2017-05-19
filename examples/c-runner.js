@@ -67,6 +67,9 @@ function testIntegration(opts) {
   });
 }
 
+function transformBuffer(buffer, opts) {
+  if (buffer.stderr) buffer.stderr = sanitizeStdErr(buffer.stderr, opts);
+}
 
 function sanitizeStdErr(error, opts) {
   return error.replace(/clang.*-std=c[^\s]+/g, '')

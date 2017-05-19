@@ -88,7 +88,7 @@ function testIntegration(opts) {
     }
 
     if (opts.files)
-      args.push.apply(args, opts.filteredFilePaths('cs'));
+      args.push.apply(args, opts.filePaths.filter(p => /\.cs$/.test(p)));
 
     if (opts.solution)
       args.push(_outputFileSync(path.join(opts.dir, 'code.cs'), opts.solution));

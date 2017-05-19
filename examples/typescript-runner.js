@@ -54,14 +54,15 @@ function testIntegration(opts) {
   });
 }
 
-function sanitizeStdErr(error, opts) {
+function transformBuffer(buffer, opts) {
+  if (buffer.stdout) buffer.stdout = sanitize(buffer.stdout, opts);
+  if (buffer.stderr) buffer.stderr = sanitize(buffer.stderr, opts);
+}
+
+function sanitize(error, opts) {
   return error.replace(/(\()?\/codewars\/[(\w\/-\d.js:) ;]*/g, '')
               .replace(/( Object. )?[\(]?\[eval\][-:\w\d\)]* at/g, '')
               .replace(/Module._compile.*/g, '')
               .replace('Object.Test.handleError ', '')
               .replace('  ', ' ');
-}
-
-function sanitizeStdOut(stdout, opts) {
-  return sanitizeStdErr(stdout, opts);
 }

@@ -52,6 +52,7 @@ function transformBuffer(buffer, opts) {
       buffer.stderr += "\nNOTE: Line numbers reported within errors will not match up exactly to those shown within your editors due to concatenation.";
     }
   }
+  if (buffer.stdout) buffer.stdout = sanitizeStdOut(buffer.stdout, opts);
 }
 
 function sanitizeStdOut(stdout, opts) {
